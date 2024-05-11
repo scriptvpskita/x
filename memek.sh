@@ -1,3 +1,5 @@
+#!/bin/bash
+
 domain=$(cat /etc/xray/domain)
 uuid=$(cat /proc/sys/kernel/random/uuid)
 # custom path
