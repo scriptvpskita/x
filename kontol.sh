@@ -53,6 +53,7 @@ cat > /usr/local/etc/xray/will666.json << END
       "tag": "api"
     },
         {
+            "tag": "vless-xtls",
             "port": 1369,
             "protocol": "vless",
             "settings": {
@@ -185,7 +186,10 @@ cat > /usr/local/etc/xray/will666.json << END
   "stats": {},
   "api": {
     "services": [
-      "StatsService"
+      "StatsService",
+      "HandlerService",
+      "ReflectionService",
+      "LoggerService"
     ],
     "tag": "api"
   },
@@ -341,6 +345,7 @@ cat > /usr/local/etc/xray/will69.json << END
       "tag": "api"
     },
         {
+            "tag": "trojan-tcp",
             "port": 1310,
             "listen": "127.0.0.1",
             "protocol": "trojan",
@@ -420,7 +425,10 @@ cat > /usr/local/etc/xray/will69.json << END
   "stats": {},
   "api": {
     "services": [
-      "StatsService"
+      "StatsService",
+      "HandlerService",
+      "ReflectionService",
+      "LoggerService"
     ],
     "tag": "api"
   },
