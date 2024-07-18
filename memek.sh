@@ -54,6 +54,7 @@ cat > /usr/local/etc/xray/config.json << END
       "tag": "api"
     },
       {
+          "tag": "trojan-ws",
           "port": 1320,
           "listen": "127.0.0.1",
           "protocol": "trojan",
@@ -77,6 +78,7 @@ cat > /usr/local/etc/xray/config.json << END
       }
     },
         {
+            "tag": "vless-ws",
             "port": 1234,
             "listen": "127.0.0.1",
             "protocol": "vless",
@@ -101,6 +103,7 @@ cat > /usr/local/etc/xray/config.json << END
             }
         },
         {
+            "tag": "vmess-tcp",
             "port": 2345,
             "listen": "127.0.0.1",
             "protocol": "vmess",
@@ -131,6 +134,7 @@ cat > /usr/local/etc/xray/config.json << END
             }
         },
         {
+            "tag": "vmess-ws",
             "port": 3456,
             "listen": "127.0.0.1",
             "protocol": "vmess",
@@ -154,6 +158,7 @@ cat > /usr/local/etc/xray/config.json << END
         }
   },
         {
+            "tag": "vmess-upgrade",
             "port": 4567,
             "listen": "127.0.0.1",
             "protocol": "vmess",
@@ -176,6 +181,7 @@ cat > /usr/local/etc/xray/config.json << END
             }
         },
         {
+            "tag": "vless-upgrade",
             "port": 5678,
             "listen": "127.0.0.1",
             "protocol": "vless",
@@ -198,6 +204,7 @@ cat > /usr/local/etc/xray/config.json << END
             }
         },
         {
+            "tag": "trojan-upgrade",
             "port": 6789,
             "listen": "127.0.0.1",
             "protocol": "trojan",
@@ -220,6 +227,7 @@ cat > /usr/local/etc/xray/config.json << END
             }
         },
 {
+            "tag": "trojan-grpc",
             "port": 31501,
             "listen": "127.0.0.1",
             "protocol": "trojan",
@@ -241,6 +249,7 @@ cat > /usr/local/etc/xray/config.json << END
             }
        },
        {
+        "tag": "vless-grpc",
         "port": 31502,
         "listen": "127.0.0.1",
         "protocol": "vless",
@@ -263,6 +272,7 @@ cat > /usr/local/etc/xray/config.json << END
         }
     },
        {
+        "tag": "vmess-grpc",
         "port": 31503,
         "listen": "127.0.0.1",
         "protocol": "vmess",
@@ -337,7 +347,10 @@ cat > /usr/local/etc/xray/config.json << END
   "stats": {},
   "api": {
     "services": [
-      "StatsService"
+      "StatsService",
+      "HandlerService",
+      "ReflectionService",
+      "LoggerService"
     ],
     "tag": "api"
   },
@@ -493,6 +506,7 @@ cat > /usr/local/etc/xray/none.json << END
       "tag": "api"
     },
     {
+      "tag": "vmess-ws",
       "listen": "127.0.0.1",
       "port": 5210,
       "protocol": "vmess",
@@ -526,6 +540,7 @@ cat > /usr/local/etc/xray/none.json << END
       "domain": "$domain"
     },
       {
+      "tag": "vless-ws",
       "listen": "127.0.0.1",
       "port": 5211,
       "protocol": "vless",
@@ -559,6 +574,7 @@ cat > /usr/local/etc/xray/none.json << END
       "domain": "$domain"
     },
 {
+      "tag": "vmess-upgrade",
       "listen": "127.0.0.1",
       "port": 5212,
       "protocol": "vmess",
@@ -593,6 +609,7 @@ cat > /usr/local/etc/xray/none.json << END
       "domain": "$domain"
     },
 {
+      "tag": "vless-upgrade",
       "listen": "127.0.0.1",
       "port": 5213,
       "protocol": "vless",
@@ -679,7 +696,10 @@ cat > /usr/local/etc/xray/none.json << END
   "stats": {},
   "api": {
     "services": [
-      "StatsService"
+      "StatsService",
+      "HandlerService",
+      "ReflectionService",
+      "LoggerService"
     ],
     "tag": "api"
   },
