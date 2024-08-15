@@ -647,12 +647,35 @@ cat > /usr/local/etc/xray/none.json << END
   "outbounds": [
     {
       "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      },
+      "tag": "IPv4-out"
+    },
+    {
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIPv6"
+      },
+      "tag": "IPv6-out"
+    },
+    {
+      "tag": "blocked",
+      "protocol": "blackhole",
       "settings": {}
     },
     {
-      "protocol": "blackhole",
-      "settings": {},
-      "tag": "blocked"
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      },
+      "streamSettings": {
+        "sockopt": {
+          "tcpFastOpen": true
+        }
+      },
+      "type": "field",
+      "tag": "api"
     }
   ],
   "routing": {
@@ -676,6 +699,18 @@ cat > /usr/local/etc/xray/none.json << END
           "fe80::/10"
         ],
         "outboundTag": "blocked"
+      },
+      {
+        "type": "field",
+        "outboundTag": "blocked",
+        "domain": [
+          "geosite:category-ads-all",
+          "geosite:category-ads-ir",
+          "geosite:google-ads",
+          "geosite:spotify-ads",
+          "geosite:adobe-ads",
+          "geosite:apple-ads"
+        ]
       },
       {
         "inboundTag": [
@@ -703,18 +738,27 @@ cat > /usr/local/etc/xray/none.json << END
     ],
     "tag": "api"
   },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  },
   "policy": {
     "levels": {
       "0": {
         "statsUserDownlink": true,
-        "statsUserUplink": true
+        "statsUserUplink": true,
+        "statsUserOnline": true
       }
     },
     "system": {
       "statsInboundUplink": true,
       "statsInboundDownlink": true,
-      "statsOutboundUplink" : true,
-      "statsOutboundDownlink" : true
+      "statsOutboundUplink": true,
+      "statsOutboundDownlink": true
     }
   }
 }
