@@ -240,8 +240,7 @@ cat > /usr/local/etc/xray/will666.json << END
     "levels": {
       "0": {
         "statsUserDownlink": true,
-        "statsUserUplink": true,
-        "statsUserOnline": true
+        "statsUserUplink": true
       }
     },
     "system": {
@@ -406,8 +405,7 @@ cat > /usr/local/etc/xray/will69.json << END
     "levels": {
       "0": {
         "statsUserDownlink": true,
-        "statsUserUplink": true,
-        "statsUserOnline": true
+        "statsUserUplink": true
       }
     },
     "system": {
