@@ -401,8 +401,7 @@ cat > /usr/local/etc/xray/config.json << END
     "levels": {
       "0": {
         "statsUserDownlink": true,
-        "statsUserUplink": true,
-        "statsUserOnline": true
+        "statsUserUplink": true
       }
     },
     "system": {
@@ -677,8 +676,7 @@ cat > /usr/local/etc/xray/none.json << END
     "levels": {
       "0": {
         "statsUserDownlink": true,
-        "statsUserUplink": true,
-        "statsUserOnline": true
+        "statsUserUplink": true
       }
     },
     "system": {
