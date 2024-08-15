@@ -137,12 +137,35 @@ cat > /usr/local/etc/xray/will666.json << END
   "outbounds": [
     {
       "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      },
+      "tag": "IPv4-out"
+    },
+    {
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIPv6"
+      },
+      "tag": "IPv6-out"
+    },
+    {
+      "tag": "blocked",
+      "protocol": "blackhole",
       "settings": {}
     },
     {
-      "protocol": "blackhole",
-      "settings": {},
-      "tag": "blocked"
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      },
+      "streamSettings": {
+        "sockopt": {
+          "tcpFastOpen": true
+        }
+      },
+      "type": "field",
+      "tag": "api"
     }
   ],
   "routing": {
@@ -166,6 +189,18 @@ cat > /usr/local/etc/xray/will666.json << END
           "fe80::/10"
         ],
         "outboundTag": "blocked"
+      },
+      {
+        "type": "field",
+        "outboundTag": "blocked",
+        "domain": [
+          "geosite:category-ads-all",
+          "geosite:category-ads-ir",
+          "geosite:google-ads",
+          "geosite:spotify-ads",
+          "geosite:adobe-ads",
+          "geosite:apple-ads"
+        ]
       },
       {
         "inboundTag": [
@@ -193,137 +228,29 @@ cat > /usr/local/etc/xray/will666.json << END
     ],
     "tag": "api"
   },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  },
   "policy": {
     "levels": {
       "0": {
         "statsUserDownlink": true,
-        "statsUserUplink": true
+        "statsUserUplink": true,
+        "statsUserOnline": true
       }
     },
     "system": {
       "statsInboundUplink": true,
       "statsInboundDownlink": true,
-      "statsOutboundUplink" : true,
-      "statsOutboundDownlink" : true
+      "statsOutboundUplink": true,
+      "statsOutboundDownlink": true
     }
   }
-}
-{
-  "outbounds": [
-    {
-      "protocol": "dns",
-      "tag": "dns-out"
-    },
-    {
-      "streamSettings": {
-        "sockopt": {
-          "mark": 255
-        }
-      },
-      "settings": {
-        "domainStrategy": "UseIPv4"
-      },
-      "protocol": "freedom",
-      "tag": "direct"
-    },
-    {
-      "protocol": "blackhole",
-      "tag": "blackhole"
-    },
-    {
-      "settings": {
-        "servers": [
-          {
-            "port": 10085,
-            "address": "127.0.0.1"
-          }
-        ]
-      },
-      "streamSettings": {
-        "network": "tcp",
-        "security": "none"
-      },
-      "protocol": "socks",
-      "tag": "out"
-    }
-  ],
-  "log": {
-    "loglevel": "warning"
-  },
-  "dns": {
-    "hosts": {
-      "dns.tiarap": "174.138.21.128",
-      "dns.1host": "76.76.2.38",
-      "geosite:category-ads-all": "127.0.0.1"
-    },
-    "servers": [
-      {
-        "address": "https://doh.tiarap.org/dns-query",
-        "domains": ["geosite:geolocation-!cn"],
-        "expectIPs": ["geoip:!cn"]
-      },
-      "174.138.21.128",
-      {
-        "address": "174.138.21.128",
-        "port": 53,
-        "domains": ["geosite:id", "geosite:category-games@id"],
-        "expectIPs": ["geoip:id"],
-        "skipFallback": true
-      },
-      {
-        "address": "localhost",
-        "skipFallback": true
-      }
-    ]
-  },
-  "routing": {
-    "rules": [
-      {
-        "type": "field",
-        "outboundTag": "Reject",
-        "domain": ["geosite:category-ads-all"]
-      },
-      {
-        "type": "field",
-        "outboundTag": "Direct",
-        "domain": [
-          "geosite:private",
-          "geosite:apple-id",
-          "geosite:google-id",
-          "geosite:tld-id",
-          "geosite:category-games@id"
-        ]
-      },
-      {
-        "type": "field",
-        "outboundTag": "Proxy",
-        "domain": ["geosite:geolocation-!cn"]
-      },
-      {
-        "type": "field",
-        "outboundTag": "Direct",
-        "domain": ["geosite:id"]
-      },
-      {
-        "type": "field",
-        "outboundTag": "Proxy",
-        "network": "tcp,udp"
-      }
-    ]
-  },
-  "inbounds": [
-    {
-      "port": 10085,
-      "protocol": "dokodemo-door",
-      "settings": {
-        "port": 53,
-        "network": "udp",
-        "address": "174.138.21.128"
-      },
-      "tag": "dns-in",
-      "listen": "127.0.0.1"
-    }
-  ]
 }
 END
 
@@ -376,12 +303,35 @@ cat > /usr/local/etc/xray/will69.json << END
   "outbounds": [
     {
       "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      },
+      "tag": "IPv4-out"
+    },
+    {
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIPv6"
+      },
+      "tag": "IPv6-out"
+    },
+    {
+      "tag": "blocked",
+      "protocol": "blackhole",
       "settings": {}
     },
     {
-      "protocol": "blackhole",
-      "settings": {},
-      "tag": "blocked"
+      "protocol": "freedom",
+      "settings": {
+        "domainStrategy": "UseIPv4"
+      },
+      "streamSettings": {
+        "sockopt": {
+          "tcpFastOpen": true
+        }
+      },
+      "type": "field",
+      "tag": "api"
     }
   ],
   "routing": {
@@ -405,6 +355,18 @@ cat > /usr/local/etc/xray/will69.json << END
           "fe80::/10"
         ],
         "outboundTag": "blocked"
+      },
+      {
+        "type": "field",
+        "outboundTag": "blocked",
+        "domain": [
+          "geosite:category-ads-all",
+          "geosite:category-ads-ir",
+          "geosite:google-ads",
+          "geosite:spotify-ads",
+          "geosite:adobe-ads",
+          "geosite:apple-ads"
+        ]
       },
       {
         "inboundTag": [
@@ -432,137 +394,29 @@ cat > /usr/local/etc/xray/will69.json << END
     ],
     "tag": "api"
   },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls",
+      "quic"
+    ]
+  },
   "policy": {
     "levels": {
       "0": {
         "statsUserDownlink": true,
-        "statsUserUplink": true
+        "statsUserUplink": true,
+        "statsUserOnline": true
       }
     },
     "system": {
       "statsInboundUplink": true,
       "statsInboundDownlink": true,
-      "statsOutboundUplink" : true,
-      "statsOutboundDownlink" : true
+      "statsOutboundUplink": true,
+      "statsOutboundDownlink": true
     }
   }
-}
-{
-  "outbounds": [
-    {
-      "protocol": "dns",
-      "tag": "dns-out"
-    },
-    {
-      "streamSettings": {
-        "sockopt": {
-          "mark": 255
-        }
-      },
-      "settings": {
-        "domainStrategy": "UseIPv4"
-      },
-      "protocol": "freedom",
-      "tag": "direct"
-    },
-    {
-      "protocol": "blackhole",
-      "tag": "blackhole"
-    },
-    {
-      "settings": {
-        "servers": [
-          {
-            "port": 10085,
-            "address": "127.0.0.1"
-          }
-        ]
-      },
-      "streamSettings": {
-        "network": "tcp",
-        "security": "none"
-      },
-      "protocol": "socks",
-      "tag": "out"
-    }
-  ],
-  "log": {
-    "loglevel": "warning"
-  },
-  "dns": {
-    "hosts": {
-      "dns.tiarap": "174.138.21.128",
-      "dns.1host": "76.76.2.38",
-      "geosite:category-ads-all": "127.0.0.1"
-    },
-    "servers": [
-      {
-        "address": "https://doh.tiarap.org/dns-query",
-        "domains": ["geosite:geolocation-!cn"],
-        "expectIPs": ["geoip:!cn"]
-      },
-      "174.138.21.128",
-      {
-        "address": "174.138.21.128",
-        "port": 53,
-        "domains": ["geosite:id", "geosite:category-games@id"],
-        "expectIPs": ["geoip:id"],
-        "skipFallback": true
-      },
-      {
-        "address": "localhost",
-        "skipFallback": true
-      }
-    ]
-  },
-  "routing": {
-    "rules": [
-      {
-        "type": "field",
-        "outboundTag": "Reject",
-        "domain": ["geosite:category-ads-all"]
-      },
-      {
-        "type": "field",
-        "outboundTag": "Direct",
-        "domain": [
-          "geosite:private",
-          "geosite:apple-id",
-          "geosite:google-id",
-          "geosite:tld-id",
-          "geosite:category-games@id"
-        ]
-      },
-      {
-        "type": "field",
-        "outboundTag": "Proxy",
-        "domain": ["geosite:geolocation-!cn"]
-      },
-      {
-        "type": "field",
-        "outboundTag": "Direct",
-        "domain": ["geosite:id"]
-      },
-      {
-        "type": "field",
-        "outboundTag": "Proxy",
-        "network": "tcp,udp"
-      }
-    ]
-  },
-  "inbounds": [
-    {
-      "port": 10085,
-      "protocol": "dokodemo-door",
-      "settings": {
-        "port": 53,
-        "network": "udp",
-        "address": "174.138.21.128"
-      },
-      "tag": "dns-in",
-      "listen": "127.0.0.1"
-    }
-  ]
 }
 END
 
