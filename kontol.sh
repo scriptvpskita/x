@@ -164,7 +164,6 @@ cat > /usr/local/etc/xray/will666.json << END
           "tcpFastOpen": true
         }
       },
-      "type": "field",
       "tag": "api"
     }
   ],
@@ -329,7 +328,6 @@ cat > /usr/local/etc/xray/will69.json << END
           "tcpFastOpen": true
         }
       },
-      "type": "field",
       "tag": "api"
     }
   ],
