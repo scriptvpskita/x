@@ -600,7 +600,6 @@ cat > /usr/local/etc/xray/none.json << END
           "tcpFastOpen": true
         }
       },
-      "type": "field",
       "tag": "api"
     }
   ],
