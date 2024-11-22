@@ -325,7 +325,6 @@ cat > /usr/local/etc/xray/config.json << END
           "tcpFastOpen": true
         }
       },
-      "type": "field",
       "tag": "api"
     }
   ],
