@@ -1,3 +1,5 @@
+#!/usr/bin/bash
+
 domain=$(cat /etc/xray/domain)
 uuid=$(cat /proc/sys/kernel/random/uuid)
 trojan_ws_path=$(cat /etc/xray/path/trojan_ws_path)
